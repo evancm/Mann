@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A Better Basement – Esther Mann</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="site">
+    <header class="site-header">
+      <div class="site-header-inner">
+        <div class="site-title"><a href="index.html">ESTHER MANN</a></div>
+        <nav class="nav">
+          <a href="about.html">About</a>
+          <a class="active" href="built-work.html">Built Work</a>
+          <a href="pottery.html">Pottery</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+      </div>
+      <div class="divider"></div>
+    </header>
+
+    <main class="page-inner">
+
+      <!-- Hero image -->
+      <section class="project-hero">
+        <img src="images/better-basement.jpg" alt="A Better Basement">
+      </section>
+
+      <!-- Gray band -->
+      <section class="project-band">
+        <div class="project-band-inner">
+          <div>
+            <h1 class="project-title">A Better Basement</h1>
+            <p class="project-subtitle">Chicago, IL</p>
+          </div>
+          <p class="project-description">
+            A renovation and interior reconfiguration that prioritizes light, circulation,
+            and a quieter material palette while respecting the original brick envelope.
+          </p>
+        </div>
+      </section>
+
+      <!-- Carousel -->
+      <section class="carousel" aria-label="Project photos carousel">
+        <div class="carousel-track" id="carouselTrack">
+          <!-- Replace these with your 15–20 images -->
+          <div class="carousel-slide"><img src="images/city-01.jpg" alt="House in the City photo 1"></div>
+          <div class="carousel-slide"><img src="images/city-02.jpg" alt="House in the City photo 2"></div>
+          <div class="carousel-slide"><img src="images/city-03.jpg" alt="House in the City photo 3"></div>
+        </div>
+
+        <div class="carousel-controls">
+          <button class="carousel-button prev" type="button" aria-label="Previous image" id="prevBtn">‹</button>
+          <button class="carousel-button next" type="button" aria-label="Next image" id="nextBtn">›</button>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <div class="footer-left">
+          <span>@ESTHERMANN 2026</span>
+          <span>
+            Instagram:
+            <a href="https://instagram.com/mannpottery" target="_blank" rel="noopener">@mannpottery</a>
+          </span>
+        </div>
+        <nav class="footer-nav">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+        <div class="footer-pot"></div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const track = document.getElementById('carouselTrack');
+      const prev = document.getElementById('prevBtn');
+      const next = document.getElementById('nextBtn');
+
+      function slideBy(direction) {
+        const firstSlide = track.querySelector('.carousel-slide');
+        if (!firstSlide) return;
+
+        const gap = parseFloat(getComputedStyle(track).gap || '0');
+        const step = firstSlide.getBoundingClientRect().width + gap;
+
+        track.scrollBy({ left: direction * step, behavior: 'smooth' });
+      }
+
+      prev.addEventListener('click', () => slideBy(-1));
+      next.addEventListener('click', () => slideBy(1));
+    })();
+  </script>
+</body>
+</html>
