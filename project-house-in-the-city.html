@@ -81,25 +81,49 @@
     </footer>
   </div>
 
-  <script>
-    (function () {
-      const track = document.getElementById('carouselTrack');
-      const prev = document.getElementById('prevBtn');
-      const next = document.getElementById('nextBtn');
+<script>
+  (function () {
+    const track = document.getElementById('carouselTrack');
+    const prev = document.getElementById('prevBtn');
+    const next = document.getElementById('nextBtn');
 
-      function slideBy(direction) {
-        const firstSlide = track.querySelector('.carousel-slide');
-        if (!firstSlide) return;
+    // Build slides from a naming pattern like city-01.jpg ... city-20.jpg
+    const prefix = track.dataset.prefix;       // e.g. "city"
+    const count = parseInt(track.dataset.count, 10); // e.g. 20
+    const ext = track.dataset.ext || "jpg";
+    const altBase = track.dataset.alt || "Project photo";
 
-        const gap = parseFloat(getComputedStyle(track).gap || '0');
-        const step = firstSlide.getBoundingClientRect().width + gap;
+    function pad2(n) { return String(n).padStart(2, "0"); }
 
-        track.scrollBy({ left: direction * step, behavior: 'smooth' });
-      }
+    for (let i = 1; i <= count; i++) {
+      const filename = `images/${prefix}-${pad2(i)}.${ext}`;
 
-      prev.addEventListener('click', () => slideBy(-1));
-      next.addEventListener('click', () => slideBy(1));
-    })();
-  </script>
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+
+      const img = document.createElement('img');
+      img.src = filename;
+      img.alt = `${altBase} ${i}`;
+      img.loading = "lazy";
+
+      slide.appendChild(img);
+      track.appendChild(slide);
+    }
+
+    function slideBy(direction) {
+      const firstSlide = track.querySelector('.carousel-slide');
+      if (!firstSlide) return;
+
+      const gap = parseFloat(getComputedStyle(track).gap || '0');
+      const step = firstSlide.getBoundingClientRect().width + gap;
+
+      track.scrollBy({ left: direction * step, behavior: 'smooth' });
+    }
+
+    prev.addEventListener('click', () => slideBy(-1));
+    next.addEventListener('click', () => slideBy(1));
+  })();
+</script>
+
 </body>
 </html>
