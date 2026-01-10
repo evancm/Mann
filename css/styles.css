@@ -422,6 +422,8 @@ p {
 
 /* ===== Carousel ===== */
 
+/* ===== Carousel (variable width like BCJ) ===== */
+
 .carousel {
   margin-top: 1.5rem;
   position: relative;
@@ -429,6 +431,7 @@ p {
 
 .carousel-track {
   display: flex;
+  align-items: center;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   gap: 1rem;
@@ -440,20 +443,29 @@ p {
   height: 10px;
 }
 
+/* Each slide's width is determined by the image ratio at a fixed height */
 .carousel-slide {
-  flex: 0 0 78%;
+  flex: 0 0 auto;                 /* key: variable width */
+  height: min(72vh, 650px);        /* consistent viewing height */
   scroll-snap-align: center;
   border: 1px solid var(--border);
-  overflow: hidden;
   background: #fff;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Image keeps its aspect ratio; width becomes variable */
 .carousel-slide img {
-  width: 100%;
-  height: auto;
+  height: 100%;
+  width: auto;
+  max-width: 92vw;                /* prevents ultra-wide images from taking over */
+  object-fit: contain;            /* no cropping */
   display: block;
 }
 
+/* Controls unchanged */
 .carousel-controls {
   position: absolute;
   inset: 0;
@@ -485,15 +497,12 @@ p {
 .carousel-button.next { right: 12px; }
 
 @media (max-width: 768px) {
-  .work-grid {
-    grid-template-columns: 1fr;
-  }
-  .project-band-inner {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
   .carousel-slide {
-    flex-basis: 92%;
+    height: min(62vh, 520px);
+  }
+  .carousel-slide img {
+    max-width: 96vw;
   }
 }
+
 
