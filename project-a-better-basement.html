@@ -88,8 +88,8 @@
     const next = document.getElementById('nextBtn');
 
     // Build slides from a naming pattern like city-01.jpg ... city-20.jpg
-    const prefix = track.dataset.prefix;       // e.g. "city"
-    const count = parseInt(track.dataset.count, 10); // e.g. 20
+    const prefix = track.dataset.prefix;
+    const count = parseInt(track.dataset.count, 10);
     const ext = track.dataset.ext || "jpg";
     const altBase = track.dataset.alt || "Project photo";
 
@@ -110,18 +110,44 @@
       track.appendChild(slide);
     }
 
-    function slideBy(direction) {
-      const firstSlide = track.querySelector('.carousel-slide');
-      if (!firstSlide) return;
-
-      const gap = parseFloat(getComputedStyle(track).gap || '0');
-      const step = firstSlide.getBoundingClientRect().width + gap;
-
-      track.scrollBy({ left: direction * step, behavior: 'smooth' });
+    function getSlides() {
+      return Array.from(track.querySelectorAll('.carousel-slide'));
     }
 
-    prev.addEventListener('click', () => slideBy(-1));
-    next.addEventListener('click', () => slideBy(1));
+    // Find the slide whose center is closest to the viewport center
+    function getCurrentIndex() {
+      const slides = getSlides();
+      if (!slides.length) return 0;
+
+      const trackRect = track.getBoundingClientRect();
+      const viewportCenter = trackRect.left + trackRect.width / 2;
+
+      let bestIndex = 0;
+      let bestDist = Infinity;
+
+      slides.forEach((slide, idx) => {
+        const r = slide.getBoundingClientRect();
+        const center = r.left + r.width / 2;
+        const dist = Math.abs(center - viewportCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIndex = idx;
+        }
+      });
+
+      return bestIndex;
+    }
+
+    function goToIndex(idx) {
+      const slides = getSlides();
+      if (!slides.length) return;
+
+      const clamped = Math.max(0, Math.min(idx, slides.length - 1));
+      slides[clamped].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    prev.addEventListener('click', () => goToIndex(getCurrentIndex() - 1));
+    next.addEventListener('click', () => goToIndex(getCurrentIndex() + 1));
   })();
 </script>
 
