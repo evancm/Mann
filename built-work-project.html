@@ -11,7 +11,12 @@
     <header class="site-header">
       <div class="site-header-inner">
         <div class="site-title"><a href="index.html">ESTHER MANN</a></div>
-        <nav class="nav">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <nav class="nav" id="mainNav">
           <a href="about.html">About</a>
           <a class="active" href="built-work.html">Built Work</a>
           <a href="pottery.html">Pottery</a>
@@ -32,17 +37,23 @@
     <footer class="site-footer">
       <div class="site-footer-inner">
         <div class="footer-left">
-          <span>@ESTHERMANN 2025</span>
-          <span>Instagram: @mannpottery</span>
+          <span>&copy; Esther Mann 2026</span>
+          <a href="https://instagram.com/mannpottery" target="_blank" rel="noopener">@mannpottery</a>
         </div>
         <nav class="footer-nav">
           <a href="index.html">Home</a>
           <a href="about.html">About</a>
           <a href="contact.html">Contact</a>
         </nav>
-        <div class="footer-pot"></div>
+        <div class="footer-pot"><img src="images/footer-symbol.jpg" alt="Esther Mann"></div>
       </div>
     </footer>
   </div>
+<script>
+  document.getElementById('menuToggle').addEventListener('click', function() {
+    this.classList.toggle('active');
+    document.getElementById('mainNav').classList.toggle('active');
+  });
+</script>
 </body>
 </html>
