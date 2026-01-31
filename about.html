@@ -22,39 +22,41 @@
     </header>
 
     <main class="page-inner">
-      <section class="about-hero">
-        <!-- B&W Hummelstown image -->
-        <img src="images/hummelstown-hero.jpg" alt="Black and white view of Hummelstown, PA in the 1800s">
-      </section>
+      <div class="about-wrapper">
+        <article class="about-content">
+          <h1 class="about-title">About</h1>
 
-      <section class="about-layout">
-        <div class="about-portrait">
-          <!-- Portrait of Esther -->
-          <img src="images/esther-portrait.jpg" alt="Portrait of Esther Mann">
-        </div>
-        <div class="about-text">
-          <h1 class="page-title">About</h1>
-          <p>
-            Esther Mann is an architect and ceramic artist based in [City]. Her work
-            explores the relationship between built space and the handmade object,
-            drawing from early memories of Hummelstown, Pennsylvania and its
-            19th-century brick and stone architecture.
-          </p>
-          <p>
-            She maintains a practice that spans residential design, interiors, and
-            small-batch studio pottery. Each project is grounded in material honesty,
-            careful proportion, and the quiet details of everyday life.
-          </p>
-          <!-- Edit / add paragraphs here as needed -->
-        </div>
-      </section>
+          <div class="about-text-with-image">
+            <img src="images/esther-mann-sampler.jpg" alt="Needlepoint sampler by Esther Mann, 1827" class="about-sampler" id="samplerImage">
+            <p>Esther Mann is the making of Ashley Morgan, an architect and ceramic artist based in Chicago, Illinois. Esther, her vocational namesake and maternal forebear, was born in 1819 in Hummelstown, Pennsylvania. Trained in needlepoint and stitch work from a young age, Esther demonstrated notable skill, creating intricate compositions as early as eight years old. The creative energy that Esther exhibited as a young girl—working with her hands and often in solitude—serves as a parallel and grounding influence for Ashley.</p>
+            <p>The collection of images displayed here at esther-mann.com encompass the work produced - both building design and ceramic production - from 2021-2025.</p>
+          </div>
+
+          <blockquote class="about-quote">
+            "Here, here in the back of your head and there in your heart – that is where the picture is created. Only what the spirit creates is real. But what reality is is something which not even the physicists know any more. Therefore they must become metaphysicians. But you, sister, you know it from your own experience. You must know it." – Oscar Kokoschka
+          </blockquote>
+        </article>
+
+        <section class="about-hero-bottom">
+          <img src="images/hummelstown.jpg" alt="Hummelstown Hill and Bridge, Hummelstown, PA">
+        </section>
+      </div>
     </main>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+      <img class="lightbox-image" id="lightboxImage" src="" alt="">
+    </div>
 
     <footer class="site-footer">
       <div class="site-footer-inner">
         <div class="footer-left">
           <span>@ESTHERMANN 2025</span>
-          <span>Instagram: @mannpottery</span>
+          <span>
+            Instagram:
+            <a href="https://instagram.com/mannpottery" target="_blank" rel="noopener">@mannpottery</a>
+          </span>
         </div>
         <nav class="footer-nav">
           <a href="index.html">Home</a>
@@ -65,5 +67,35 @@
       </div>
     </footer>
   </div>
+
+<script>
+  (function () {
+    const samplerImage = document.getElementById('samplerImage');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxClose = document.querySelector('.lightbox-close');
+
+    samplerImage.addEventListener('click', () => {
+      lightboxImage.src = samplerImage.src;
+      lightboxImage.alt = samplerImage.alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  })();
+</script>
+
 </body>
 </html>

@@ -16,8 +16,17 @@
 }
 
 html {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  font-size: 16px;
+  font-family: "Adobe Garamond Pro", "Garamond Premier Pro", Garamond, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+strong, b {
+  font-weight: 600;
+}
+
+em, i {
+  font-style: italic;
 }
 
 body {
@@ -84,7 +93,7 @@ img {
 .nav {
   display: flex;
   gap: 1.75rem;
-  font-size: 0.9rem;
+  font-size: 14.4px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
 }
@@ -206,24 +215,66 @@ p {
 
 /* ===== About ===== */
 
-.about-hero {
-  margin-bottom: 2rem;
+.about-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.about-hero img {
+.about-content {
+  max-width: 100%;
+}
+
+.about-title {
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: underline;
+  margin: 0 0 1.5rem;
+}
+
+.about-text-with-image {
+  overflow: hidden;
+}
+
+.about-sampler {
+  float: right;
+  width: 280px;
+  margin: 0 0 1rem 1.5rem;
+  cursor: pointer;
+}
+
+.about-content p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0 0 1.5rem;
+  max-width: none;
+}
+
+.about-quote {
+  font-style: italic;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 2rem 0;
+  padding: 0;
+  border: none;
+}
+
+.about-hero-bottom {
+  margin-top: 2rem;
+}
+
+.about-hero-bottom img {
   width: 100%;
-  border: 1px solid var(--border);
+  display: block;
 }
 
-.about-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
-  gap: 2.5rem;
-  align-items: start;
-}
-
-.about-portrait img {
-  border: 1px solid var(--border);
+@media (max-width: 768px) {
+  .about-sampler {
+    float: none;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto 1.5rem;
+    display: block;
+  }
 }
 
 /* ===== Grids (pottery & built work) ===== */
@@ -389,7 +440,7 @@ p {
 }
 
 .project-band {
-  background: #f2f2f2;
+  background: #e6e3de;
   border: 1px solid var(--border);
   border-top: none;
   padding: 1.25rem 1.25rem;
@@ -454,6 +505,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 /* Image keeps its aspect ratio; width becomes variable */
@@ -477,12 +529,13 @@ p {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.7);
-  background: rgba(17,17,17,0.25);
+  background: rgba(17,17,17,0.45);
   color: #fff;
+  font-size: 1.5rem;
   display: grid;
   place-items: center;
   cursor: pointer;
@@ -490,7 +543,7 @@ p {
 }
 
 .carousel-button:hover {
-  background: rgba(17,17,17,0.35);
+  background: rgba(17,17,17,0.55);
 }
 
 .carousel-button.prev { left: 12px; }
@@ -505,4 +558,434 @@ p {
   }
 }
 
+/* ===== Pottery Gallery ===== */
+
+.gallery-header {
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 0 0 2rem;
+}
+
+.gallery-header em {
+  font-style: italic;
+}
+
+.gallery-subtitle {
+  font-style: italic;
+  color: var(--muted);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem 3rem;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+/* Vertical divider - only on right-column items, spanning image height only */
+.gallery-item:nth-child(even) .gallery-image-wrapper::before {
+  content: '';
+  position: absolute;
+  left: -1.5rem;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.gallery-image-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.gallery-nav {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.2s;
+}
+
+.gallery-nav:hover {
+  color: var(--text);
+}
+
+.gallery-image {
+  flex: 1;
+  display: block;
+}
+
+.gallery-image img {
+  width: 100%;
+  height: auto;
+}
+
+.gallery-info {
+  padding-left: 2rem;
+}
+
+.gallery-title {
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.gallery-status {
+  font-style: italic;
+  color: #c44;
+  font-size: 0.9rem;
+  margin-bottom: 0.25rem;
+}
+
+.gallery-status--enquire {
+  color: #c44;
+}
+
+.gallery-dimensions {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.gallery-price {
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+@media (max-width: 768px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .gallery-item:nth-child(even) .gallery-image-wrapper::before {
+    display: none;
+  }
+
+  .gallery-info {
+    padding-left: 2rem;
+  }
+}
+
+/* Lightbox */
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.lightbox.active {
+  display: flex;
+}
+
+.lightbox-image {
+  max-width: 70vw;
+  max-height: 75vh;
+  object-fit: contain;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2.5rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+.lightbox-close:hover {
+  color: #ccc;
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 3rem;
+  cursor: pointer;
+  padding: 1rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.lightbox-nav:hover {
+  opacity: 1;
+}
+
+.lightbox-nav--prev {
+  left: 1rem;
+}
+
+.lightbox-nav--next {
+  right: 1rem;
+}
+
+.lightbox-nav.hidden {
+  display: none;
+}
+
+.gallery-image {
+  cursor: pointer;
+}
+
+/* ===== Project Page (detailed layout) ===== */
+
+.project-page {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  background: #fff;
+}
+
+.project-hero-full {
+  width: 100%;
+  margin-bottom: 18px;
+}
+
+.project-hero-full img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Info band below hero */
+.project-info-band {
+  background: #e6e3de;
+  padding: 2rem;
+  margin-bottom: 18px;
+}
+
+.project-info-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--text);
+}
+
+.project-info-title {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.project-info-location {
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text);
+}
+
+.project-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+}
+
+.project-info-meta p {
+  margin: 0.2rem 0;
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.project-info-meta .meta-spacer {
+  height: 0.75rem;
+}
+
+.project-info-description h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-style: italic;
+  margin: 0 0 0.75rem;
+}
+
+.project-info-description p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0;
+  max-width: none;
+}
+
+/* Content sections */
+.project-content-section {
+  margin: 0;
+  margin-bottom: 18px;
+  padding: 2rem;
+  background: #e6e3de;
+}
+
+.project-content-section.project-content-section--with-image {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 0;
+  align-items: stretch;
+}
+
+.project-content-section--image-left {
+  grid-template-columns: 1.5fr 1fr;
+}
+
+.content-text-block h2 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  font-style: italic;
+  margin: 0 0 1rem;
+}
+
+.content-text-block p {
+  font-size: 0.9rem;
+  line-height: 1.7;
+  margin: 0 0 1rem;
+  max-width: none;
+}
+
+.content-text-block p:last-child {
+  margin-bottom: 0;
+}
+
+.content-image-block img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Flush images - pull image to edges with negative margins */
+.project-content-section--with-image .content-text-block {
+  padding-right: 2rem;
+}
+
+.project-content-section--with-image .content-image-block {
+  margin: -2rem -2rem -2rem 0;
+}
+
+.project-content-section--with-image .content-image-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Image on left - flip the margins */
+.project-content-section--image-left .content-text-block {
+  padding-right: 0;
+  padding-left: 2rem;
+}
+
+.project-content-section--image-left .content-image-block {
+  margin: -2rem 0 -2rem -2rem;
+}
+
+.content-image-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.content-image-stack img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Image row - 3 images side by side */
+.project-image-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  margin-bottom: 18px;
+}
+
+.project-image-row img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .project-image-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Full width images between sections */
+.project-full-image {
+  width: 100%;
+  margin: 0 0 18px;
+}
+
+.project-full-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Project page carousel adjustments */
+.project-page .carousel {
+  margin: 0;
+  margin-top: 0 !important;
+  margin-bottom: 8px;
+}
+
+.project-page .carousel-track {
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .project-info-band {
+    padding: 1.5rem;
+  }
+
+  .project-info-header {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .project-info-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .project-content-section--with-image {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .project-content-section--with-image .content-text-block {
+    padding: 0;
+  }
+
+  .project-content-section--with-image .content-image-block {
+    margin: -1.5rem -1.5rem 0 -1.5rem;
+  }
+
+  .project-content-section--image-left .content-image-block {
+    margin: -1.5rem -1.5rem 0 -1.5rem;
+  }
+
+  .project-content-section {
+    padding: 2rem 1.5rem;
+  }
+}
 

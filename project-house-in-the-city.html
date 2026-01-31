@@ -21,51 +21,83 @@
       <div class="divider"></div>
     </header>
 
-    <main class="page-inner">
+    <main class="project-page">
 
       <!-- Hero image -->
-      <section class="project-hero">
-        <img src="images/exterior.jpg" alt="House in the City">
+      <section class="project-hero-full">
+        <img src="images/house-in-the-city.jpg" alt="House in the City exterior">
       </section>
 
-      <!-- Gray band -->
-      <section class="project-band">
-        <div class="project-band-inner">
-          <div>
-            <h1 class="project-title">House in the City</h1>
-            <p class="project-subtitle">Chicago, IL</p>
+      <!-- Info band -->
+      <section class="project-info-band">
+        <div class="project-info-header">
+          <h1 class="project-info-title">House in the City</h1>
+          <span class="project-info-location">Chicago, Illinois</span>
+        </div>
+        <div class="project-info-grid">
+          <div class="project-info-meta">
+            <p><strong>Built</strong> 1891</p>
+            <p><strong>Size</strong> 4,300 square-feet</p>
+            <p><strong>Renovation completed</strong> 2025</p>
+            <p class="meta-spacer"></p>
+            <p><strong>Architecture,</strong> Esther Mann</p>
+            <p><strong>Interiors,</strong> Esther Mann in collaboration with<br>Third Coast Interiors + Cynthia Halterman</p>
+            <p><strong>General Contractor,</strong> Vladimir Havlic</p>
+            <p class="meta-spacer"></p>
+            <p><em>Photography by Jeffrey Johnson</em></p>
           </div>
-          <p class="project-description">
-            A renovation and interior reconfiguration that prioritizes light, circulation,
-            and a quieter material palette while respecting the original brick envelope.
-          </p>
+          <div class="project-info-description">
+            <h2>Renovation of a Historic Chicago Victorian</h2>
+            <p>This Chicago Victorian, originally constructed in 1891, experienced a major transformation in the 1990s when two separate apartments were combined to create a single-family residence. In 2024, new owners were drawn to the home's unique architectural details but sought to improve its functionality by streamlining its fragmented floor plan, making movement between spaces more fluid.</p>
+            <br>
+            <p>Like many Victorian homes, the interior originally featured swinging doors that divided the living room, dining room, and kitchen. These barriers to circulation were removed, replaced by large, open portals that visually and physically connect the three main living areas. The expanded openings also enhance natural light, allowing it to flow from the kitchen into adjacent spaces. A wall between the kitchen and the eat-in banquette was removed, and custom cabinetry was designed for improved function and seamless flow. The dark oak trim of the new millwork complements the home's existing wood grain, while its flat, inlay panels offer a modern touch that reflects the latest updates.</p>
+          </div>
         </div>
       </section>
 
       <!-- Carousel -->
-<section class="carousel" aria-label="Project photos carousel">
-  <div
-    class="carousel-track"
-    id="carouselTrack"
-    data-prefix="city"
-    data-count="20"
-    data-ext="jpg"
-    data-alt="House in the City"
-  ></div>
+      <section class="carousel" aria-label="Project photos carousel">
+        <div class="carousel-track" id="carouselTrack"></div>
+        <div class="carousel-controls">
+          <button class="carousel-button prev" type="button" aria-label="Previous image" id="prevBtn">&#8249;</button>
+          <button class="carousel-button next" type="button" aria-label="Next image" id="nextBtn">&#8250;</button>
+        </div>
+      </section>
 
-  <div class="carousel-controls">
-    <button class="carousel-button prev" type="button" aria-label="Previous image" id="prevBtn">‹</button>
-    <button class="carousel-button next" type="button" aria-label="Next image" id="nextBtn">›</button>
-  </div>
-</section>
+      <!-- Interior Aesthetic with image on left -->
+      <section class="project-content-section project-content-section--with-image project-content-section--image-left">
+        <div class="content-image-block">
+          <img src="images/city-12.jpg" alt="Interior detail">
+        </div>
+        <div class="content-text-block">
+          <h2>Interior Aesthetic</h2>
+          <p>The homeowners were inspired by the distinctive and personal style of the previous owner, who left behind a few cherished furnishings that add character to the space. Their design approach focused on preserving the home's established aesthetic while incorporating their own pieces and infusing the interiors with a sense of youthful energy. Working closely with Guinevere Johnson of Third Coast Interiors, they curated a mix of vintage finds, contemporary staples, and unique auction-sourced items. The atmosphere was further refreshed with new paint and soft linen window treatments, brightening each room and creating a welcoming environment.</p>
+        </div>
+      </section>
 
+      <!-- Construction Carousel -->
+      <section class="carousel" aria-label="Construction photos carousel">
+        <div class="carousel-track" id="constructionCarouselTrack"></div>
+        <div class="carousel-controls">
+          <button class="carousel-button prev" type="button" aria-label="Previous image" id="constructionPrevBtn">&#8249;</button>
+          <button class="carousel-button next" type="button" aria-label="Next image" id="constructionNextBtn">&#8250;</button>
+        </div>
+      </section>
 
     </main>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-nav--prev" id="lightboxPrev" aria-label="Previous image">&#8249;</button>
+    <img class="lightbox-image" id="lightboxImage" src="" alt="">
+    <button class="lightbox-nav lightbox-nav--next" id="lightboxNext" aria-label="Next image">&#8250;</button>
+  </div>
 
     <footer class="site-footer">
       <div class="site-footer-inner">
         <div class="footer-left">
-          <span>@ESTHERMANN 2026</span>
+          <span>@ESTHERMANN 2025</span>
           <span>
             Instagram:
             <a href="https://instagram.com/mannpottery" target="_blank" rel="noopener">@mannpottery</a>
@@ -87,34 +119,37 @@
     const prev = document.getElementById('prevBtn');
     const next = document.getElementById('nextBtn');
 
-    // Build slides from a naming pattern like city-01.jpg ... city-20.jpg
-    const prefix = track.dataset.prefix;
-    const count = parseInt(track.dataset.count, 10);
-    const ext = track.dataset.ext || "jpg";
-    const altBase = track.dataset.alt || "Project photo";
+    // Carousel images - city-01 through city-20
+    const carouselImages = [];
+    for (let i = 1; i <= 20; i++) {
+      carouselImages.push(`images/city-${String(i).padStart(2, '0')}.jpg`);
+    }
 
-    function pad2(n) { return String(n).padStart(2, "0"); }
-
-    for (let i = 1; i <= count; i++) {
-      const filename = `images/${prefix}-${pad2(i)}.${ext}`;
-
+    carouselImages.forEach((src, i) => {
       const slide = document.createElement('div');
       slide.className = 'carousel-slide';
 
       const img = document.createElement('img');
-      img.src = filename;
-      img.alt = `${altBase} ${i}`;
-      img.loading = "lazy";
+      img.src = src;
+      img.alt = `House in the City interior ${i + 1}`;
+      img.loading = 'lazy';
 
       slide.appendChild(img);
       track.appendChild(slide);
-    }
+    });
+
+    // Start at city-02.jpg (index 1)
+    requestAnimationFrame(() => {
+      const slides = track.querySelectorAll('.carousel-slide');
+      if (slides[1]) {
+        track.scrollLeft = slides[1].offsetLeft - (track.offsetWidth / 2) + (slides[1].offsetWidth / 2);
+      }
+    });
 
     function getSlides() {
       return Array.from(track.querySelectorAll('.carousel-slide'));
     }
 
-    // Find the slide whose center is closest to the viewport center
     function getCurrentIndex() {
       const slides = getSlides();
       if (!slides.length) return 0;
@@ -148,9 +183,153 @@
 
     prev.addEventListener('click', () => goToIndex(getCurrentIndex() - 1));
     next.addEventListener('click', () => goToIndex(getCurrentIndex() + 1));
+
+    // Construction Carousel
+    const constructionTrack = document.getElementById('constructionCarouselTrack');
+    const constructionPrev = document.getElementById('constructionPrevBtn');
+    const constructionNext = document.getElementById('constructionNextBtn');
+
+    // Construction images - city-construction-01 through city-construction-31
+    const constructionImages = [];
+    for (let i = 1; i <= 31; i++) {
+      constructionImages.push(`images/city-construction-${String(i).padStart(2, '0')}.jpg`);
+    }
+
+    constructionImages.forEach((src, i) => {
+      const slide = document.createElement('div');
+      slide.className = 'carousel-slide';
+
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Construction photo ${i + 1}`;
+      img.loading = 'lazy';
+
+      slide.appendChild(img);
+      constructionTrack.appendChild(slide);
+    });
+
+    function getConstructionSlides() {
+      return Array.from(constructionTrack.querySelectorAll('.carousel-slide'));
+    }
+
+    function getConstructionCurrentIndex() {
+      const slides = getConstructionSlides();
+      if (!slides.length) return 0;
+
+      const trackRect = constructionTrack.getBoundingClientRect();
+      const viewportCenter = trackRect.left + trackRect.width / 2;
+
+      let bestIndex = 0;
+      let bestDist = Infinity;
+
+      slides.forEach((slide, idx) => {
+        const r = slide.getBoundingClientRect();
+        const center = r.left + r.width / 2;
+        const dist = Math.abs(center - viewportCenter);
+        if (dist < bestDist) {
+          bestDist = dist;
+          bestIndex = idx;
+        }
+      });
+
+      return bestIndex;
+    }
+
+    function goToConstructionIndex(idx) {
+      const slides = getConstructionSlides();
+      if (!slides.length) return;
+
+      const clamped = Math.max(0, Math.min(idx, slides.length - 1));
+      slides[clamped].scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+    }
+
+    constructionPrev.addEventListener('click', () => goToConstructionIndex(getConstructionCurrentIndex() - 1));
+    constructionNext.addEventListener('click', () => goToConstructionIndex(getConstructionCurrentIndex() + 1));
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImage = document.getElementById('lightboxImage');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.getElementById('lightboxPrev');
+    const lightboxNext = document.getElementById('lightboxNext');
+
+    let currentLightboxIndex = 0;
+    let currentLightboxImages = carouselImages;
+
+    function showLightboxImage(index) {
+      currentLightboxIndex = ((index % currentLightboxImages.length) + currentLightboxImages.length) % currentLightboxImages.length;
+      lightboxImage.src = currentLightboxImages[currentLightboxIndex];
+    }
+
+    // Click on carousel slides to open lightbox
+    track.addEventListener('click', (e) => {
+      const slide = e.target.closest('.carousel-slide');
+      if (!slide) return;
+
+      const img = slide.querySelector('img');
+      if (!img) return;
+
+      currentLightboxImages = carouselImages;
+      const filename = img.src.split('/').pop();
+      currentLightboxIndex = carouselImages.findIndex(src => src.includes(filename));
+      if (currentLightboxIndex === -1) currentLightboxIndex = 0;
+
+      lightboxImage.src = carouselImages[currentLightboxIndex];
+      lightboxImage.alt = img.alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Click on construction carousel to open lightbox
+    constructionTrack.addEventListener('click', (e) => {
+      const slide = e.target.closest('.carousel-slide');
+      if (!slide) return;
+
+      const img = slide.querySelector('img');
+      if (!img) return;
+
+      const filename = img.src.split('/').pop();
+      currentLightboxIndex = constructionImages.findIndex(src => src.includes(filename));
+      if (currentLightboxIndex === -1) currentLightboxIndex = 0;
+
+      currentLightboxImages = constructionImages;
+
+      lightboxImage.src = constructionImages[currentLightboxIndex];
+      lightboxImage.alt = img.alt;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    // Lightbox navigation
+    lightboxPrev.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showLightboxImage(currentLightboxIndex - 1);
+    });
+
+    lightboxNext.addEventListener('click', (e) => {
+      e.stopPropagation();
+      showLightboxImage(currentLightboxIndex + 1);
+    });
+
+    // Close lightbox
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+      if (lightbox.classList.contains('active')) {
+        if (e.key === 'ArrowLeft') showLightboxImage(currentLightboxIndex - 1);
+        if (e.key === 'ArrowRight') showLightboxImage(currentLightboxIndex + 1);
+      }
+    });
   })();
 </script>
-
 
 </body>
 </html>
