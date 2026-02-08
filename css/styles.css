@@ -88,6 +88,15 @@ img {
 .site-title a {
   text-decoration: none;
   color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-symbol {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .nav {
