@@ -82,7 +82,7 @@
       <!-- Material Palette with image on left -->
       <section class="project-content-section project-content-section--with-image project-content-section--image-left">
         <div class="content-image-block">
-          <img src="images/redwoods-09.jpg" alt="Interior detail showing material palette">
+          <img src="images/redwoods-09.jpg" alt="Interior detail showing material palette" loading="lazy">
         </div>
         <div class="content-text-block">
           <h2>Material Palette</h2>
@@ -92,7 +92,7 @@
 
       <!-- Full width interior image -->
       <section class="project-full-image">
-        <img src="images/redwoods-08.jpg" alt="Interior space">
+        <img src="images/redwoods-08.jpg" alt="Interior space" loading="lazy">
       </section>
 
       <!-- Interior Character -->
@@ -102,7 +102,7 @@
           <p>Deliberate effort was made to retain some of the home's original, distinctive character and warmth. Notable features include a dramatically sloped cedar ceiling with unique grain and visual interest, as well as three antique fireplaces, each adding a touch of retro charm to the updated spaces. These preserved elements provide a sense of continuity and history, ensuring that the spirit of the house endures alongside its new, modern functionality.</p>
         </div>
         <div class="content-image-block">
-          <img src="images/redwoods-13.jpg" alt="Interior character detail">
+          <img src="images/redwoods-13.jpg" alt="Interior character detail" loading="lazy">
         </div>
       </section>
 
@@ -114,13 +114,13 @@
           <p>Additionally, what was once a crawl space below the main residence was converted into a compact apartment, with a fully equipped kitchen, eating nook, bedroom and bathroom.</p>
         </div>
         <div class="content-image-block">
-          <img src="images/redwoods-17.jpg" alt="Secondary living space">
+          <img src="images/redwoods-17.jpg" alt="Secondary living space" loading="lazy">
         </div>
       </section>
 
       <!-- Full width forest trail image -->
       <section class="project-full-image">
-        <img src="images/bw-woods.jpg" alt="Forest trail connecting to Mount Tam">
+        <img src="images/bw-woods.jpg" alt="Forest trail connecting to Mount Tam" loading="lazy">
       </section>
 
       <!-- Construction Carousel -->
@@ -250,13 +250,11 @@
     const constructionPrev = document.getElementById('constructionPrevBtn');
     const constructionNext = document.getElementById('constructionNextBtn');
 
-    // Construction images - sorted numerically
-    const constructionImages = [
-      1,2,3,4,5,6,7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,
-      31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,50,51,52,53,54,55,56,57,58,59,
-      60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,
-      90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,120,121,122,125
-    ].map(n => `images/redwoods-construction-${n}.jpg`);
+    // Construction images - 1 through 109
+    const constructionImages = [];
+    for (let i = 1; i <= 109; i++) {
+      constructionImages.push(`images/redwoods-construction-${i}.jpg`);
+    }
 
     constructionImages.forEach((src, i) => {
       const slide = document.createElement('div');

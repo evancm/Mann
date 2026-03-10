@@ -73,7 +73,7 @@
       <!-- Interior Aesthetic with image on left -->
       <section class="project-content-section project-content-section--with-image project-content-section--image-left">
         <div class="content-image-block">
-          <img src="images/city-12.jpg" alt="Interior detail">
+          <img src="images/city-12.jpg" alt="Interior detail" loading="lazy">
         </div>
         <div class="content-text-block">
           <h2>Interior Aesthetic</h2>
@@ -193,9 +193,9 @@
     const constructionPrev = document.getElementById('constructionPrevBtn');
     const constructionNext = document.getElementById('constructionNextBtn');
 
-    // Construction images - city-construction-01 through city-construction-31
+    // Construction images - city-construction-01 through city-construction-26
     const constructionImages = [];
-    for (let i = 1; i <= 31; i++) {
+    for (let i = 1; i <= 26; i++) {
       constructionImages.push(`images/city-construction-${String(i).padStart(2, '0')}.jpg`);
     }
 
